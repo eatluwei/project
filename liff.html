@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單填寫</title>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+</head>
+
+<body>
+    <h2>請稍候，正在載入訂單表單...</h2>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            liff.init({ liffId: "2007075048-Ll12r4zO" }).then(() => {
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                } else {
+                    liff.getProfile().then(profile => {
+                        console.log("🔍 LINE User ID:", profile.userId);
+                        var googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfGZfKyBxeUpag0WcAd65SVThsfwaZ5rFy2F0Q4osBE44JjHg/viewform?usp=sharing";
+                        var redirectUrl = googleFormUrl + "?usp=pp_url&entry.YOUR_LINE_ID_FIELD=" + profile.userId;
+                        window.location.href = redirectUrl; // **自動跳轉 Google Form**
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
