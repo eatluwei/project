@@ -33,7 +33,7 @@
         // 請將 YOUR_GOOGLE_FORM_ID 替換為您的 Google Form ID，
         // 並將 entry.1234567890 替換為用來接收 LINE User ID 的欄位參數名稱
         var googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfGZfKyBxeUpag0WcAd65SVThsfwaZ5rFy2F0Q4osBE44JjHg/viewform?usp=pp_url";
-        var entryField = "LINEID"; 
+        var entryField = "entry.1379183301"; 
         var formUrl = googleFormBaseUrl + "&" + entryField + "=" + encodeURIComponent(profile.userId);
         // 自動導向 Google Form 表單
         window.location.href = formUrl;
