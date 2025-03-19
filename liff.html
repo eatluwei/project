@@ -3,62 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LIFF 訂單應用範例</title>
+  <title>前往訂餐網頁中…</title>
   <!-- 載入 LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 1.5em;
+      font-family: Arial, sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <h1>LIFF 訂單應用</h1>
-  <p id="status">正在初始化 LIFF...</p>
-  
-  <!-- 使用者資訊區塊 -->
-  <div id="profile" style="display:none;">
-    <p><strong>使用者 ID:</strong> <span id="userId"></span></p>
-    <p><strong>顯示名稱:</strong> <span id="displayName"></span></p>
-    <p><strong>狀態訊息:</strong> <span id="statusMessage"></span></p>
-    <p>
-      <strong>大頭貼:</strong><br>
-      <img id="pictureUrl" src="" alt="Profile Picture" width="100">
-    </p>
-    <!-- 按鈕：點擊後將導向 Google Form，並附加使用者的 LINE User ID -->
-    <button id="openFormBtn">前往訂單表單</button>
-  </div>
+  <p>前往訂餐網頁中…</p>
   
   <script>
     // 請將 YOUR_LIFF_ID 替換為您的 LIFF ID
     const liffId = "2007075048-Ll12r4zO";
     
-    // 初始化 LIFF
+    // 初始化 LIFF 並取得使用者資訊，然後自動導向 Google Form
     liff.init({ liffId: liffId })
       .then(() => {
-        document.getElementById('status').textContent = "LIFF 初始化成功！";
-        // 取得使用者資訊
         return liff.getProfile();
       })
       .then(profile => {
-        // 將取得的使用者資訊顯示在頁面上
-        document.getElementById('userId').textContent = profile.userId;
-        document.getElementById('displayName').textContent = profile.displayName;
-        document.getElementById('statusMessage').textContent = profile.statusMessage;
-        document.getElementById('pictureUrl').src = profile.pictureUrl;
-        
-        // 顯示使用者資訊區塊
-        document.getElementById('profile').style.display = 'block';
-        
-        // 綁定按鈕點擊事件：點擊後導向 Google Form
-        document.getElementById('openFormBtn').addEventListener('click', function() {
-          // 請將 YOUR_GOOGLE_FORM_ID 替換為您的 Google Form ID
-          // 並將 entry.1234567890 替換為 Google Form 中用來接收 LINE User ID 的欄位 ID
-          var googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfGZfKyBxeUpag0WcAd65SVThsfwaZ5rFy2F0Q4osBE44JjHg/viewform?usp=pp_url";
-          var entryField = "LINEID"; 
-          var formUrl = googleFormBaseUrl + "&" + entryField + "=" + encodeURIComponent(profile.userId);
-          // 導向 Google Form 頁面
-          window.location.href = formUrl;
-        });
+        // 請將 YOUR_GOOGLE_FORM_ID 替換為您的 Google Form ID，
+        // 並將 entry.1234567890 替換為用來接收 LINE User ID 的欄位參數名稱
+        var googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfGZfKyBxeUpag0WcAd65SVThsfwaZ5rFy2F0Q4osBE44JjHg/viewform?usp=pp_url";
+        var entryField = "LINEID"; 
+        var formUrl = googleFormBaseUrl + "&" + entryField + "=" + encodeURIComponent(profile.userId);
+        // 自動導向 Google Form 表單
+        window.location.href = formUrl;
       })
       .catch(error => {
-        document.getElementById('status').textContent = "LIFF 初始化失敗：" + error;
         console.error("LIFF 初始化失敗：", error);
+        document.body.innerHTML = "<p>錯誤：" + error + "</p>";
       });
   </script>
 </body>
