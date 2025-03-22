@@ -6,9 +6,10 @@
   <title>前往訂餐網頁中…</title>
   <!-- 載入 LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-   <style>
+  <style>
     body {
       display: flex;
+      flex-direction: column; /* 垂直排列 */
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -20,9 +21,15 @@
       color: #70151b;
       font-weight: bold;
     }
+    /* 你可以依需求調整 LOGO 的大小 */
+    .logo {
+      max-width: 200px; /* 調整圖片最大寬度 */
+      margin-bottom: 20px; /* LOGO 與文字間距 */
+    }
   </style>
 </head>
 <body>
+  <img src="https://github.com/eatluwei/project/blob/main/logo.png" alt="Logo" class="logo">
   <p>前往訂餐網頁中…</p>
   
   <script>
@@ -35,12 +42,9 @@
         return liff.getProfile();
       })
       .then(profile => {
-        // 請將 YOUR_GOOGLE_FORM_ID 替換為您的 Google Form ID，
-        // 並將 entry.1234567890 替換為用來接收 LINE User ID 的欄位參數名稱
         var googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfGZfKyBxeUpag0WcAd65SVThsfwaZ5rFy2F0Q4osBE44JjHg/viewform?usp=pp_url";
         var entryField = "entry.1379183301"; 
         var formUrl = googleFormBaseUrl + "&" + entryField + "=" + encodeURIComponent(profile.userId);
-        // 自動導向 Google Form 表單
         window.location.href = formUrl;
       })
       .catch(error => {
