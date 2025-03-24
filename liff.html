@@ -7,21 +7,19 @@
   <!-- 載入 LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     body {
       display: flex;
-      flex-direction: column; /* 垂直排列 */
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-size: 1.5em;
+      justify-content: center; /* 水平置中 */
+      align-items: center;     /* 垂直置中 */
       background-color: #e9e7e5;
       font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif;
     }
-    /* 你可以依需求調整 LOGO 的大小 */
     .logo {
-      max-width: 250px; /* 調整圖片最大寬度 */
-      margin-bottom: 20px; /* 與下方元素的間距 */
-      transform: translateY(-20px); /* 調整此數值以控制上移距離 */
+      max-width: 200px; /* 根據需求調整 LOGO 尺寸 */
     }
   </style>
 </head>
