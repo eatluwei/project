@@ -36,7 +36,7 @@
         return liff.getProfile();
       })
       .then(profile => {
-        var googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfGZfKyBxeUpag0WcAd65SVThsfwaZ5rFy2F0Q4osBE44JjHg/viewform?usp=pp_url";
+        var googleFormBaseUrl = "https://docs.google.com/forms/d/e/spreadsheets/d/1E7aQrZ1bD0oYhbHJC6OTpdeULsoZcucyqJ1IzOkYibc/viewform?usp=pp_url";
         var entryField = "entry.1379183301"; 
         var formUrl = googleFormBaseUrl + "&" + entryField + "=" + encodeURIComponent(profile.userId);
         window.location.href = formUrl;
